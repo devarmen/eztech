@@ -1,3 +1,5 @@
+import { ViewportScroller } from '@angular/common';
+import { identifierModuleUrl } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
@@ -13,13 +15,17 @@ export class AppComponent implements OnInit {
   partnerLogos = [];
   navigationLinks = [];
 
-  ngOnInit() {
+  constructor(private scroller: ViewportScroller) {
+
+  }
+
+  ngOnInit(): void {
     this.navigationLinks = [
-      { displayText: 'HOME', id: 'home' },
-      { displayText: 'ABOUT', id: 'home' },
-      { displayText: 'HOME', id: 'home' },
-      { displayText: 'HOME', id: 'home' },
-      { displayText: 'HOME', id: 'home' },
+      { displayText: 'HOME', id: 'hero' },
+      { displayText: 'ABOUT', id: 'about' },
+      { displayText: 'OUR SERVICES', id: 'services' },
+      { displayText: 'OUR PARTNERS', id: 'partners' },
+      { displayText: 'CONTACT US', id: 'contact' },
     ];
     this.partnerLogos = [
       { source: '../assets/partners-logos/hp.png', alt: 'HP' },
@@ -34,7 +40,16 @@ export class AppComponent implements OnInit {
       { source: '../assets/partners-logos/ibm.png', alt: 'IBM' },
       { source: '../assets/partners-logos/dell.png', alt: 'Dell' },
     ];
+  }
 
+  goTo(id: string): void {
+    document.getElementById(id).scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'nearest'
+    });
+
+    this.isExpanded = false;
 
   }
 }

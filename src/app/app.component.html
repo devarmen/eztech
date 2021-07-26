@@ -9,12 +9,9 @@
     </button>
     
     <ul class="navigation-list" [class.navigation-list__expanded]="isExpanded">
-      <li *ngFor="let nav of navigationLinks"><a href="javascript:void(0)" class="navigation-list-link">HOME</a></li>
-      <li><a href="javascript:void(0)" class="navigation-list-link">HOME</a></li>
-      <li><a href="javascript:void(0)" class="navigation-list-link">ABOUT</a></li>
-      <li><a href="javascript:void(0)" class="navigation-list-link">OUR SERVICES</a></li>
-      <li><a href="javascript:void(0)" class="navigation-list-link">OUR PARTNERS</a></li>
-      <li><a href="javascript:void(0)" class="navigation-list-link">CONTACT US</a></li>
+      <li *ngFor="let nav of navigationLinks">
+        <a href="javascript:void(0)" class="navigation-list-link" (click)="goTo(nav.id)">{{ nav.displayText }}</a>
+      </li>
     </ul>
 
   </nav>
@@ -59,13 +56,13 @@
       <div class="services-list">
         <div class="services-list-item">
           <span class="icon">
-            <app-maintenance-icon></app-maintenance-icon>
+            <app-solutions-icon></app-solutions-icon>
           </span>
           <p>IT Hardware and Software Solutions</p>
         </div>
         <div class="services-list-item">
           <span class="icon">
-            <app-maintenance-icon></app-maintenance-icon>
+            <app-datacenter-icon></app-datacenter-icon>
           </span>
           <p>Data Center Optimization Solutions</p>
         </div>
@@ -77,25 +74,25 @@
         </div>
         <div class="services-list-item">
           <span class="icon">
-            <app-maintenance-icon></app-maintenance-icon>
+            <app-network-security-icon></app-network-security-icon>
           </span>
           <p>Network Security Solutions</p>
         </div>
         <div class="services-list-item">
           <span class="icon">
-            <app-maintenance-icon></app-maintenance-icon>
+            <app-recovery-icon></app-recovery-icon>
           </span>
           <p>Disaster Recovery Solutions</p>
         </div>
         <div class="services-list-item">
           <span class="icon">
-            <app-maintenance-icon></app-maintenance-icon>
+            <app-backup-icon></app-backup-icon>
           </span>
           <p>Enterprise Storage Backup Solutions</p>
         </div>
         <div class="services-list-item">
           <span class="icon">
-            <app-maintenance-icon></app-maintenance-icon>
+            <app-integration-icon></app-integration-icon>
           </span>
           <p>Systems Integration</p>
         </div>
