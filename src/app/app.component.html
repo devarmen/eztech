@@ -102,10 +102,17 @@
   </div> 
   <div class="overlay-white">
     <section id="partners" class="partners">
+
       <div class="partners-list">
-        <div class="partners-list-item" *ngFor="let partner of partnerLogos">
-          <img [src]="partner.source" [alt]="partner.alt">
-        </div>
+        <ngb-carousel #carousel [interval]="3000" [pauseOnHover]="true" [pauseOnFocus]="true" (slide)="onSlide($event)">
+          <ng-template ngbSlide *ngFor="let img of partnerLogos; index as i">
+            <div class="carousel-caption">
+            </div>
+            <div class="partners-list-item">
+              <img [src]="img.source" [alt]="img.alt">
+            </div>
+          </ng-template>
+        </ngb-carousel>
       </div>
       <h2>Our Partners</h2>
     </section>
@@ -113,10 +120,15 @@
   <div class="overlay-blue">
     <section id="contact" class="contact">
       <div class="row">
+        <div class="col-lg-12">
+        <h3>Got a Question? Contact Us</h3>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-lg-6">
           <form class="contact-form">
             <div class="form-group">
-              <label for="name">Full Name</label>
+              <label for="name">Name</label>
               <input type="text" class="form-control" id="name" name="name">
             </div>
             <div class="form-group">
@@ -124,21 +136,19 @@
               <input type="text" class="form-control" id="email" name="email">
             </div>
             <div class="form-group">
-              <label for="subject">Subject</label>
-              <input type="text" class="form-control" id="subject" name="subject">
-            </div>
-            <div class="form-group">
               <label for="message">Message</label>
-              <textarea name="message" id="message" rows="7" class="form-control"></textarea>
+              <textarea [ngModel]="mailBody" name="message" id="message" rows="7" class="form-control"></textarea>
             </div>
+            <a class="btn btn-primary" href="mailto:sales@eztechit.com&subject={{mailSubject}}&body={{(mailBody)}}`" >
+              Submit
+            </a>
+            <p class="tel">Tel: <a href="tel:+63275091428">(02) 8691-9608</a></p>
+            <p>Email: <a href="mailto:sales@eztechit.com">sales@eztechit.com</a></p>
           </form>
         </div>
         <div class="col-lg-6 contact-details">
-          <h3>Got a Question? Contact Us</h3>
-          <p class="tel">Tel: <a href="tel:+63275091428">(02) 8691-9608</a></p>
-          <p>Email: <a href="mailto:sales@eztechit.com">sales@eztechit.com</a></p>
           <div class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241.49883419592155!2d121.02270913650517!3d14.428238529370107!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397d1cffb4c2403%3A0xaf671a656c393080!2sSycamore%20ARCS%201!5e0!3m2!1sen!2sph!4v1630014785844!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d241.49898549337868!2d121.02258151998126!3d14.428099010722535!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x348b5c4713ba17a8!2sEZTech%20IT%20Solutions!5e0!3m2!1sen!2sph!4v1632665293335!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
           </div>
           <h3>Or visit us</h3>
           <p>Unit 302 The Sycamore Bldg. (beside Sycamore ARCS 1 bldg.) Buencamino Street, Cupang Muntinlupa City</p>
@@ -154,8 +164,8 @@
         <div class="col-md-6">
           <p><b>EZTech IT SOLUTIONS</b></p>
           <p>Unit 302 The Sycamore Bldg. (beside Sycamore ARCS 1 bldg.) Buencamino Street, Cupang Muntinlupa City</p>
-          <p>Tel: (02) 8691-9608</p>
-          <p>sales@eztechit.com</p>
+          <p class="tel">Tel: <a href="tel:+63275091428">(02) 8691-9608</a></p>
+          <p>Email: <a href="mailto:sales@eztechit.com">sales@eztechit.com</a></p>
         </div>
         <div class="col-md-6">
           <div class="logo">

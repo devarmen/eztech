@@ -12,6 +12,7 @@ import { BackupIconComponent,
   RecoveryIconComponent,
   SolutionsIconComponent
  } from './icons/icons';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { BackupIconComponent,
   imports: [
     BrowserModule,
     NgbModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

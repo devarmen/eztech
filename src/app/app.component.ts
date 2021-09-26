@@ -1,7 +1,8 @@
 import { ViewportScroller } from '@angular/common';
 import { identifierModuleUrl } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +15,21 @@ export class AppComponent implements OnInit {
   isExpanded = false;
   partnerLogos = [];
   navigationLinks = [];
+  mailSubject = encodeURIComponent('From EZTech Website Contact Page');
+  contactFormBody = '';
 
-  constructor(private scroller: ViewportScroller) {
+  public get mailBody() {
+    return encodeURIComponent(this.contactFormBody);
+
+  }
+
+  @ViewChild('carousel', {static : true}) carousel: NgbCarousel;
+
+  paused = false;
+  unpauseOnArrow = false;
+  pauseOnIndicator = false;
+
+  constructor() {
 
   }
 
@@ -28,17 +42,11 @@ export class AppComponent implements OnInit {
       { displayText: 'CONTACT US', id: 'contact' },
     ];
     this.partnerLogos = [
-      { source: '../assets/partners-logos/hp.png', alt: 'HP' },
-      { source: '../assets/partners-logos/apc.png', alt: 'APC' },
-      { source: '../assets/partners-logos/asus.png', alt: 'Asus' },
-      { source: '../assets/partners-logos/acer.png', alt: 'Acer' },
-      { source: '../assets/partners-logos/lenovo.png', alt: 'Lenovo' },
-      { source: '../assets/partners-logos/microsoft.png', alt: 'Microsoft' },
-      { source: '../assets/partners-logos/hewlett-packard.png', alt: 'Hewlett Packard' },
-      { source: '../assets/partners-logos/emerson.png', alt: 'Emerson' },
-      { source: '../assets/partners-logos/veeam.png', alt: 'Veeam' },
-      { source: '../assets/partners-logos/ibm.png', alt: 'IBM' },
-      { source: '../assets/partners-logos/dell.png', alt: 'Dell' },
+      { source: '../assets/partners-logos/logos1.png', alt: 'Partner logos' },
+      { source: '../assets/partners-logos/logos2.png', alt: 'Partner logos' },
+      { source: '../assets/partners-logos/logos3.png', alt: 'Partner logos' },
+      // { source: '../assets/partners-logos/logos2.png', alt: 'HP' },
+      // { source: '../assets/partners-logos/logos3.png', alt: 'HP' },
     ];
   }
 
@@ -51,5 +59,24 @@ export class AppComponent implements OnInit {
 
     this.isExpanded = false;
 
+  }
+
+  togglePaused() {
+    if (this.paused) {
+      this.carousel.cycle();
+    } else {
+      this.carousel.pause();
+    }
+    this.paused = !this.paused;
+  }
+
+  onSlide(slideEvent: NgbSlideEvent) {
+    if (this.unpauseOnArrow && slideEvent.paused &&
+      (slideEvent.source === NgbSlideEventSource.ARROW_LEFT || slideEvent.source === NgbSlideEventSource.ARROW_RIGHT)) {
+      this.togglePaused();
+    }
+    if (this.pauseOnIndicator && !slideEvent.paused && slideEvent.source === NgbSlideEventSource.INDICATOR) {
+      this.togglePaused();
+    }
   }
 }
